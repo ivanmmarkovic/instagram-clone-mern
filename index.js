@@ -9,6 +9,10 @@ mongoose.connect('mongodb://admin:password@localhost:27017/articles?authSource=a
     useUnifiedTopology: true 
 });
 
+
+const userRoutes = require('./routes/UserRoutes');
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -16,6 +20,8 @@ app.get('/', async (req, res, next) => {
     res.json({message: 'Hello world'});
 });
 
+
+app.use('/', userRoutes);
 
 app.listen(PORT, 
     () => console.log(`Server is listening on port ${PORT}`)
