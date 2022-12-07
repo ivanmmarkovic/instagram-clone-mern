@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://admin:password@localhost:27017/articles?authSource=admin', {
+mongoose.connect('mongodb://admin:password@localhost:27017/instagram?authSource=admin', {
     useNewUrlParser: true,
     useUnifiedTopology: true 
 });
