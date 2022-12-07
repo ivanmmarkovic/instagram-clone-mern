@@ -25,19 +25,37 @@ router
 router
     .route('/users/:id')
         .get(async(req, res, next) => {
-            let {id} = req.params;
-            let user = await UserModel.findById(id);
-            return res.json(user);
+            try {
+                let {id} = req.params;
+                let user = await UserModel.findById(id);
+                return res.json(user);
+            } catch (error) {
+                return res
+                    .status(400)
+                    .json({message: error.message});
+            }
         })
         .patch(async(req, res, next) => {
-            let {id} = req.params;
-            let user = await UserModel.findByIdAndUpdate(id, {...req.body}, {new: true});
-            return res.json(user);
+            try {
+                let {id} = req.params;
+                let user = await UserModel.findByIdAndUpdate(id, {...req.body}, {new: true});
+                return res.json(user);
+            } catch (error) {
+                return res
+                    .status(400)
+                    .json({message: error.message});
+            }
         })
         .delete(async(req, res, next) => {
-            let {id} = req.params;
-            let user = await UserModel.findByIdAndDelete(id);
-            return res.status(204).json(null);
+            try {
+                let {id} = req.params;
+                let user = await UserModel.findByIdAndDelete(id);
+                return res.status(204).json(null);
+            } catch (error) {
+                return res
+                    .status(400)
+                    .json({message: error.message});
+            }
         });
 
 
