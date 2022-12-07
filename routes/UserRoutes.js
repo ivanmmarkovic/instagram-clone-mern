@@ -28,6 +28,16 @@ router
             let {id} = req.params;
             let user = await UserModel.findById(id);
             return res.json(user);
+        })
+        .patch(async(req, res, next) => {
+            let {id} = req.params;
+            let user = await UserModel.findByIdAndUpdate(id, {...req.body}, {new: true});
+            return res.json(user);
+        })
+        .delete(async(req, res, next) => {
+            let {id} = req.params;
+            let user = await UserModel.findByIdAndDelete(id);
+            return res.status(204).json(null);
         });
 
 
