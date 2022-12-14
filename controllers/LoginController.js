@@ -11,7 +11,6 @@ const login = async (req, res, next) => {
         if(user == null){
             return res.status(404).json({message: `User with ${email} not found`});
         }
-        console.log('user ***************************', user);
         let matches = await bcrypt.compare(password, user.password);
         if(!matches){
             return res
