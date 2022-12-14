@@ -9,7 +9,7 @@ const createUser = async (req, res, next) => {
         let { username, email, password } = req.body;
         password = await bcrypt.hash(password, 10);
         let user = await UserModel.create({ username, email, password });
-        let token = jwt.sign({username, id: user._id, email: user.email}, global.jwtKey, {
+        let token = jwt.sign({username: user.username, id: user._id, email: user.email}, global.jwtKey, {
             algorithm: "HS256",
             expiresIn: global.jwtExpires
         });
