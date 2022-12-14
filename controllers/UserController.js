@@ -9,7 +9,7 @@ const createUser = async (req, res, next) => {
         let { username, email, password } = req.body;
         password = await bcrypt.hash(password, 10);
         let user = await UserModel.create({ username, email, password });
-        let token = jwt.sign({username, id: user._id}, global.jwtKey, {
+        let token = jwt.sign({username, id: user._id, email: user.email}, global.jwtKey, {
             algorithm: "HS256",
             expiresIn: global.jwtExpires
         });
@@ -68,6 +68,32 @@ const deleteUser = async(req, res, next) => {
     }
 };
 
+
+const login = async (req, res, next) => {
+    try {
+        let {email, password} = req.body;
+        let user = await UserModel.findOne({email});
+        if(user == null){
+            return res.status(404).json({message: `User with ${email} not found`});
+        }
+        let matches = bcrypt.compare(password, user.password);
+        if(!matches){
+            return res
+                .status(400)
+                .json({message: 'Wrong password'});
+        }
+
+        let token = jwt.sign({username, id: user._id, email: user.email}, global.jwtKey, {
+            algorithm: "HS256",
+            expiresIn: global.jwtExpires
+        });
+        res.set("Authorization", "Bearer " + token);
+    } catch (error) {
+        return res
+            .status(400)
+            .json({ message: error.message });
+    }
+};
 
 module.exports = {
     createUser,
