@@ -37,6 +37,16 @@
 		{
 			"name": "users get",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iml2YW4iLCJpZCI6IjYzOWE0YjY2NzhjMmE3ZDg1YmE2NmM0NSIsImVtYWlsIjoiaXZhbkBleGFtcGxlLmNvbSIsImlhdCI6MTY3MTA1OTIzNSwiZXhwIjoxNzU3NDU5MjM1fQ.nuHOfygmKz7ODIHxt5eX5PZlJUsnUMYUA5DJ4HMqhbs",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -117,6 +127,34 @@
 					"path": [
 						"users",
 						"639121ef4a77287dcb43d59b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ivan@example.com\",\n    \"password\": \"ivan\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
 					]
 				}
 			},
