@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/UserController');
 
+const auth = require('../middlewares/Auth');
 
 router
     .route('/users')
         .post(UserController.createUser)
-        .get(UserController.getUsers);
+        .get(auth, UserController.getUsers);
 
 router
     .route('/users/:id')
