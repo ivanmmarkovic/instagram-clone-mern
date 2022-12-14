@@ -1,12 +1,20 @@
 
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const UserModel = require('../models/User');
 
 
 const createUser = async (req, res, next) => {
-    let { username, email, password } = req.body;
     try {
+        let { username, email, password } = req.body;
+        password = await bcrypt.hash(password, 10);
         let user = await UserModel.create({ username, email, password });
+        let token = jwt.sign({username, id: user._id}, global.jwtKey, {
+            algorithm: "HS256",
+            expiresIn: global.jwtExpires
+        });
+        res.set("Authorization", "Bearer " + token);
+
         return res
             .status(201)
             .json(user);
