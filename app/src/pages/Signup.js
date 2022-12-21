@@ -1,5 +1,5 @@
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
@@ -10,6 +10,7 @@ import './Signup.css';
 const Signup = () => {
 
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
 
     const usernameField = useRef(null);
     const emailField = useRef(null);
@@ -47,13 +48,19 @@ const Signup = () => {
                 emailField.current.value = '';
                 passwordField.current.value = '';
 
+                // handle exceptions when set item
+                // https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem#exceptions
                 localStorage.setItem('token', token);
                 localStorage.setItem('_id', _id);
                 localStorage.setItem('username', username);
                 localStorage.setItem('email', email);
+                setErrorMessage('');
                 navigate('/');
             })
-            .catch(e => console.log(e));
+            .catch(e => {
+                console.log(e);
+                setErrorMessage(e.message);
+            });
     };
 
     return (
@@ -63,6 +70,7 @@ const Signup = () => {
             <input type="email" placeholder="email" ref={ emailField } />
             <input type="password" placeholder="password" ref={ passwordField } />
             <button onClick={ handleSignup }>Signup</button>
+            <p>{ errorMessage }</p>
         </div>
 
     );
