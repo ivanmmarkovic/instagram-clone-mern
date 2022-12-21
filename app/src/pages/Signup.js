@@ -37,7 +37,11 @@ const Signup = () => {
         // .catch(e => console.log(e));
 
         axios.post(url, reqData)
-            .then(data => console.log(data))
+            .then(data => {
+                // TODO save token, redirect to posts page
+                // how to send token from server https://stackoverflow.com/questions/70210620/how-to-send-jwt-to-front-end-server-after-successful-login-for-storage-on-locals
+                console.log(data);
+            })
             .catch(e => console.log(e));
     };
 

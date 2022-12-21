@@ -14,11 +14,11 @@ const createUser = async (req, res, next) => {
             algorithm: "HS256",
             expiresIn: global.jwtExpires
         });
-        res.set("Authorization", "Bearer " + token);
+        // res.set("Authorization", "Bearer " + token);
 
         return res
             .status(201)
-            .json(user);
+            .json({user, token});
     } catch (error) {
         return res
             .status(400)
