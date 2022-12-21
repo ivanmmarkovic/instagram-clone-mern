@@ -7,6 +7,7 @@ const UserModel = require('../models/User');
 const createUser = async (req, res, next) => {
     try {
         let { username, email, password } = req.body;
+        console.log(username, email, password);
         password = await bcrypt.hash(password, 10);
         let user = await UserModel.create({ username, email, password });
         let token = jwt.sign({username: user.username, id: user._id, email: user.email}, global.jwtKey, {
