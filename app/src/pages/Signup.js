@@ -1,12 +1,15 @@
 
 import { useRef } from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
-import {url} from '../consts';
+import {signup_url} from '../consts';
 
 import './Signup.css';
 
 const Signup = () => {
+
+    const navigate = useNavigate();
 
     const usernameField = useRef(null);
     const emailField = useRef(null);
@@ -16,7 +19,6 @@ const Signup = () => {
         let username = usernameField.current.value;
         let email = emailField.current.value;
         let password = passwordField.current.value;
-        console.log(username, email, password);
 
         let reqData = {
             username, 
@@ -36,11 +38,20 @@ const Signup = () => {
         // .then(data => console.log(data))
         // .catch(e => console.log(e));
 
-        axios.post(url, reqData)
+        axios.post(signup_url, reqData)
             .then(data => {
                 // TODO save token, redirect to posts page
                 // how to send token from server https://stackoverflow.com/questions/70210620/how-to-send-jwt-to-front-end-server-after-successful-login-for-storage-on-locals
-                console.log(data);
+                let {token, user:{ _id, username, email}} = data.data;
+                usernameField.current.value = '';
+                emailField.current.value = '';
+                passwordField.current.value = '';
+
+                localStorage.setItem('token', token);
+                localStorage.setItem('_id', _id);
+                localStorage.setItem('username', username);
+                localStorage.setItem('email', email);
+                navigate('/');
             })
             .catch(e => console.log(e));
     };
