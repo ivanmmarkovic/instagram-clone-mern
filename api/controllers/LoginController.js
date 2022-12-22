@@ -14,16 +14,16 @@ const login = async (req, res, next) => {
         let matches = await bcrypt.compare(password, user.password);
         if(!matches){
             return res
-                .status(400)
-                .json({message: 'Wrong password'});
+            .status(400)
+            .json({message: 'Wrong password'});
         }
-
+        
         let token = jwt.sign({username: user.username, id: user._id, email: user.email}, global.jwtKey, {
             algorithm: "HS256",
             expiresIn: global.jwtExpires
         });
-        res.set("Authorization", "Bearer " + token);
-        return res.status(200).json(null);
+        // res.set("Authorization", "Bearer " + token);
+        return res.status(200).json({token});
     } catch (error) {
         return res
             .status(400)
