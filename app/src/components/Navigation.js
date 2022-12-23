@@ -16,6 +16,7 @@ const Navigation = () => {
 
           {isLogged &&  <Link to="/profile">Profile</Link>}
           {isLogged &&  <Link to="/stories">Stories</Link>} 
+          {isLogged &&  <Link to="/logout">Logout</Link>}
           
         </nav>
 
