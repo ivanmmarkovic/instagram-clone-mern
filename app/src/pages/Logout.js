@@ -8,6 +8,7 @@ const Logout = () => {
     const navigate = useNavigate();
     const { setIsLogged} = useContext(AppContext);
     setIsLogged(false);
+    localStorage.removeItem('token');
     navigate('/');
     return (
         <></>
