@@ -1,14 +1,22 @@
 
+import { useContext } from 'react';
 import {Link} from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 import './Navigation.css';
 
 const Navigation = () => {
 
+    const {isLogged} = useContext(AppContext);
+
     return (
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
+          { !isLogged && <Link to="/">Home</Link> }
+          { !isLogged && <Link to="/signup">Signup</Link> }
+          { !isLogged && <Link to="/login">Login</Link>}
+
+          {isLogged &&  <Link to="/profile">Profile</Link>}
+          {isLogged &&  <Link to="/stories">Stories</Link>} 
+          
         </nav>
 
     );

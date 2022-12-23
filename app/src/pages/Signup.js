@@ -1,13 +1,16 @@
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
 import {signup_url} from '../consts';
 
 import './Signup.css';
+import { AppContext } from '../context/AppContext';
 
 const Signup = () => {
+
+    const {isLogged, setIsLogged} = useContext(AppContext);
 
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
@@ -55,6 +58,7 @@ const Signup = () => {
                 localStorage.setItem('username', username);
                 localStorage.setItem('email', email);
                 setErrorMessage('');
+                setIsLogged(true);
                 navigate('/');
             })
             .catch(e => {

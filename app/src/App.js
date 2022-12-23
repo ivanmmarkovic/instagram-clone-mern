@@ -7,24 +7,29 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
+import { AppContext } from './context/AppContext';
+import { useState } from 'react';
+
 function App() {
 
-
+  const [isLogged, setIsLogged] = useState(false); 
 
   return (
+    <AppContext.Provider value={{ isLogged, setIsLogged }}>
     <Router>
       <div className='app'>
         <Navigation />
 
-
         <Routes>
-        <Route path={'/'} element={ <Home /> } />
-        <Route path={'/login'} element={ <Login /> } />
-        <Route path={'/signup'} element={ <Signup /> } />
+          <Route path={'/'} element={ <Home /> } />
+          <Route path={'/login'} element={ <Login /> } />
+          <Route path={'/signup'} element={ <Signup /> } />
         </Routes>
           
       </div>
     </Router>
+
+    </AppContext.Provider>
   );
 }
 

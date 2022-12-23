@@ -1,11 +1,14 @@
 
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { login_url } from '../consts';
+import { AppContext } from '../context/AppContext';
 
 const Login = () => {
+
+    const {isLogged, setIsLogged} = useContext(AppContext);
 
     const [errorMessage, setErrorMessage] = useState('');
     const emailField = useRef(null);
@@ -26,6 +29,7 @@ const Login = () => {
                 passwordField.current.value = '';
                 localStorage.setItem('token', token);
                 setErrorMessage('');
+                setIsLogged(true);
                 navigate('/');
             })
             .catch(e => {
