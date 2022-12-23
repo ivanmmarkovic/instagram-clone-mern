@@ -9,6 +9,8 @@ import Signup from './pages/Signup';
 
 import { AppContext } from './context/AppContext';
 import { useState } from 'react';
+import Profile from './pages/Profile';
+import Stories from './pages/Stories';
 
 function App() {
 
@@ -24,6 +26,9 @@ function App() {
           <Route path={'/'} element={ <Home /> } />
           <Route path={'/login'} element={ <Login /> } />
           <Route path={'/signup'} element={ <Signup /> } />
+
+          <Route path={'/stories'} element={ <Stories /> } />
+          <Route path={'/profile'} element={ <Profile /> } />
         </Routes>
           
       </div>
