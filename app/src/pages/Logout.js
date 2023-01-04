@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
@@ -9,10 +9,8 @@ const Logout = () => {
     const { setIsLogged} = useContext(AppContext);
     setIsLogged(false);
     localStorage.removeItem('token');
-    navigate('/');
-    return (
-        <></>
-    )
+    useEffect(() => navigate('/'));
+    // navigate('/');
 
 };
 
