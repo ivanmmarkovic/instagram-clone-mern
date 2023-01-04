@@ -46,7 +46,7 @@ const Signup = () => {
             .then(data => {
                 // TODO save token, redirect to posts page
                 // how to send token from server https://stackoverflow.com/questions/70210620/how-to-send-jwt-to-front-end-server-after-successful-login-for-storage-on-locals
-                let {token, user:{ _id, username, email}} = data.data;
+                let {token} = data.data;
                 usernameField.current.value = '';
                 emailField.current.value = '';
                 passwordField.current.value = '';
@@ -54,9 +54,6 @@ const Signup = () => {
                 // handle exceptions when set item
                 // https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem#exceptions
                 localStorage.setItem('token', token);
-                localStorage.setItem('_id', _id);
-                localStorage.setItem('username', username);
-                localStorage.setItem('email', email);
                 setErrorMessage('');
                 setIsLogged(true);
                 navigate('/');
