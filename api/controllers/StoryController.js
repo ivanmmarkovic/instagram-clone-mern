@@ -3,8 +3,6 @@ const StoryModel = require('../models/Story');
 
 const createStory = async (req, res, next) => {
     try {
-        let {url} = req.body;
-        // console.log('-----------------------------------', req.body);
         console.log('IMAGE DATA', req.files.file);
         let filepath = path.join(`${__dirname}/../public/${req.files.file.name}`);
         console.log(filepath);
