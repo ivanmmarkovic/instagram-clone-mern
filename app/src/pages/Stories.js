@@ -11,7 +11,7 @@ const Stories = () => {
 
         const formData = new FormData();
         formData.append('name', nameInputRef.current.value);
-        formData.append('file', fileInputRef.current.value);
+        formData.append('file', fileInputRef.current.files[0]);
         
         axios.post(create_story_url, formData, {headers: {
             'Content-Type': 'multipart/form-data'
