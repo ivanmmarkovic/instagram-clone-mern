@@ -11,10 +11,8 @@ const createUser = async (req, res, next) => {
         let { username, email, password } = req.body;
         password = await bcrypt.hash(password, 10);
         let user = await UserModel.create({ username, email, password });
-        let dirpath = path.join(`${__dirname}/../public/users/${user.username}`);
-        let d = fs.mkdirSync(dirpath);
-        console.log('?????????????????????????????', req.body);
-        console.log('Path of newly created directory ...', d)
+        let dirpath = path.join(`${__dirname}/../public/${user.username}`);
+        fs.mkdirSync(dirpath);
         let token = jwt.sign({username: user.username, id: user._id, email: user.email}, global.jwtKey, {
             algorithm: "HS256",
             expiresIn: global.jwtExpires
