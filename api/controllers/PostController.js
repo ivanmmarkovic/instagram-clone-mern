@@ -12,8 +12,9 @@ const createPost = async (req, res, next) => {
         console.log('IMAGE DATA', req.files.file);
 
         let filepath = path.join(`${__dirname}/../public/${username}/${req.files.file.name}`);
+        // TODO: check if file already exists
         await req.files.file.mv(filepath);
-        let post = await PostModel.create({description, imageUrl: `/${username}/${req.files.file.name}`});
+        let post = await PostModel.create({user_id: id, description, imageUrl: `/${username}/${req.files.file.name}`});
         return res
             .status(201)
             .json({post});

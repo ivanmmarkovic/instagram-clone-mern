@@ -10,6 +10,15 @@ const PostSchema = new mongoose.Schema({
         type:String,
         required: true
     },
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "UserModel"
+    }
+    /*
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "CommentModel"
+    }],
     likes: {
         type:Array,
         default: []
@@ -18,6 +27,7 @@ const PostSchema = new mongoose.Schema({
         type:Array,
         default: []
     },
+    */
 
 });
 
