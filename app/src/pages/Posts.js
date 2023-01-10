@@ -1,19 +1,19 @@
 import axios from "axios";
 import { useRef } from "react";
-import {create_story_url} from '../consts';
+import {create_post_url} from '../consts';
 
-const Stories = () => {
+const Posts = () => {
 
     const nameInputRef = useRef(null);
     const fileInputRef = useRef(null);
 
-    const handleCreateStory = () => {
+    const handleCreatePost = () => {
 
         const formData = new FormData();
         formData.append('name', nameInputRef.current.value);
         formData.append('file', fileInputRef.current.files[0]);
         
-        axios.post(create_story_url, formData, {headers: {
+        axios.post(create_post_url, formData, {headers: {
             'Content-Type': 'multipart/form-data'
         }})
         .then(data => console.log(data))
@@ -21,18 +21,18 @@ const Stories = () => {
     };
 
     return (
-        <div className={"stories"}>
-            <h1>Stories</h1>
+        <div className={"posts"}>
+            <h1>Posts</h1>
 
-            <input type="text" placeholder="Story name" ref={ nameInputRef }/>
+            <input type="text" placeholder="Post name" ref={ nameInputRef }/>
             <br />
             <input type="file" name="file" ref={ fileInputRef } />
             <br />
-            <button onClick={ handleCreateStory }>Create</button>
+            <button onClick={ handleCreatePost }>Create</button>
         </div>
     );
 
 }
 
 
-export default Stories;
+export default Posts;

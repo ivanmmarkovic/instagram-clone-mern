@@ -10,8 +10,8 @@ import Signup from './pages/Signup';
 import { AppContext } from './context/AppContext';
 import { useState } from 'react';
 import Profile from './pages/Profile';
-import Stories from './pages/Stories';
 import Logout from './pages/Logout';
+import Posts from './pages/Posts';
 
 function App() {
 
@@ -29,7 +29,7 @@ function App() {
           <Route path={'/signup'} element={ <Signup /> } />
           <Route path={'/logout'} element={ <Logout /> } />
 
-          <Route path={'/stories'} element={ <Stories /> } />
+          <Route path={'/posts'} element={ <Posts /> } />
           <Route path={'/profile'} element={ <Profile /> } />
         </Routes>
           

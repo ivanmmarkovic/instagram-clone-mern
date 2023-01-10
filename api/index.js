@@ -17,7 +17,7 @@ mongoose.connect('mongodb://admin:password@localhost:27017/instagram?authSource=
 
 const userRouter = require('./routes/UserRoutes');
 const loginRouter = require('./routes/LoginRoutes');
-const storyRouter = require('./routes/StoryRoutes');
+const postRouter = require('./routes/PostRoutes');
 
 app.use(cors());
 app.use(fileUpload());
@@ -33,7 +33,7 @@ app.get('/', async (req, res, next) => {
 
 app.use('/', userRouter);
 app.use('/', loginRouter);
-app.use('/', storyRouter);
+app.use('/', postRouter);
 
 app.listen(PORT, 
     () => console.log(`Server is listening on port ${PORT}`)

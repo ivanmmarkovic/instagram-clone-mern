@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 
-const StorySchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -21,7 +21,7 @@ const StorySchema = new mongoose.Schema({
 
 });
 
-const StoryModel = mongoose.model('StoryModel', StorySchema);
+const PostModel = mongoose.model('PostModel', PostSchema);
 
-module.exports = StoryModel;
+module.exports = PostModel;
 

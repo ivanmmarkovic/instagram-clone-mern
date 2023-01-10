@@ -1,13 +1,11 @@
 const path = require('path');
-const StoryModel = require('../models/Story');
+const PostModel = require('../models/Post');
 
-const createStory = async (req, res, next) => {
+const createPost = async (req, res, next) => {
     try {
-        console.log('IMAGE DATA', req.files.file);
         let filepath = path.join(`${__dirname}/../public/${req.files.file.name}`);
-        console.log(filepath);
         await req.files.file.mv(filepath);
-        let story = await StoryModel.create({imageUrl: url});
+        let story = await PostModel.create({imageUrl: url});
         return res
             .status(201)
             .json({story});
@@ -20,5 +18,5 @@ const createStory = async (req, res, next) => {
 
 
 module.exports = {
-    createStory
+    createPost
 };
