@@ -13,8 +13,11 @@ const Posts = () => {
         formData.append('description', nameInputRef.current.value);
         formData.append('file', fileInputRef.current.files[0]);
         
+        let token = localStorage.getItem('token');
+
         axios.post(create_post_url, formData, {headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
         }})
         .then(data => console.log(data))
         .catch(e => console.log(e));
