@@ -2,13 +2,13 @@
 const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
-    name: {
+    description: {
         type: String,
         required: true
     },
     imageUrl: {
         type:String,
-        // required: true
+        required: true
     },
     likes: {
         type:Array,

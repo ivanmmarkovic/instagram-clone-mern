@@ -10,7 +10,7 @@ const Posts = () => {
     const handleCreatePost = () => {
 
         const formData = new FormData();
-        formData.append('name', nameInputRef.current.value);
+        formData.append('description', nameInputRef.current.value);
         formData.append('file', fileInputRef.current.files[0]);
         
         axios.post(create_post_url, formData, {headers: {
@@ -24,7 +24,7 @@ const Posts = () => {
         <div className={"posts"}>
             <h1>Posts</h1>
 
-            <input type="text" placeholder="Post name" ref={ nameInputRef }/>
+            <input type="text" placeholder="Post description" ref={ nameInputRef }/>
             <br />
             <input type="file" name="file" ref={ fileInputRef } />
             <br />
