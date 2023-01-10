@@ -1,8 +1,10 @@
+const fs = require('fs');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const auth = require('./middlewares/Auth');
 
 const PORT = process.env.PORT || 5000;
 
@@ -14,6 +16,11 @@ mongoose.connect('mongodb://admin:password@localhost:27017/instagram?authSource=
     useUnifiedTopology: true 
 });
 
+try {
+    fs.mkdirSync(`${__dirname}/public`, {mode: 0o777});
+} catch (error) {
+    console.log(error);
+}
 
 const userRouter = require('./routes/UserRoutes');
 const loginRouter = require('./routes/LoginRoutes');
@@ -33,7 +40,7 @@ app.get('/', async (req, res, next) => {
 
 app.use('/', userRouter);
 app.use('/', loginRouter);
-app.use('/', postRouter);
+app.use('/', auth, postRouter);
 
 app.listen(PORT, 
     () => console.log(`Server is listening on port ${PORT}`)
